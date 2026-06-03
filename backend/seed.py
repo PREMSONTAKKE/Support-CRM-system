@@ -1,11 +1,3 @@
-"""Populate the database with sample tickets for demo / video recording.
-
-Usage from the backend/ directory:
-    .venv\Scripts\python seed.py
-
-Or with the venv active:
-    python seed.py
-"""
 from datetime import datetime, timedelta
 from database import SessionLocal, engine, Base
 from models import Ticket, Note
