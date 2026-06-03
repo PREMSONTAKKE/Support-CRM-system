@@ -45,6 +45,10 @@ frontend/coverage/
 server.out.log
 server.err.log
 
+# ---------- Project-local (not for GitHub) ----------
+DEMO_SCRIPT.md
+PROJECT_AUDIT.md
+
 # ---------- Misc ----------
 .tmp/
 .cache/
