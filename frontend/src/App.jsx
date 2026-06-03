@@ -9,7 +9,7 @@ export default function App() {
     <div className="app">
       <header className="topnav">
         <Link to="/" className="topnav__brand">
-          <span className="topnav__logo" aria-hidden="true">✦</span>
+
           <span>Support CRM</span>
         </Link>
         <nav className="topnav__links">

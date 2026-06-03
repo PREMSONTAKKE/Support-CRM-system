@@ -376,19 +376,3 @@ npx vite preview
 Production build: 178KB JS (57KB gzipped), zero warnings.
 
 ---
-
----
-
-## What I'd Do Next If I Had More Time
-
-- **Authentication** — Add login so agents can own and be assigned tickets
-- **PostgreSQL** — Swap out SQLite for durability (it resets on Render free-tier deploys)
-- **Pagination** — The list endpoint is unbounded; at scale it'd need page numbers
-- **File Attachments** — Let customers upload screenshots with their tickets
-- **Real-time Updates** — WebSockets so multiple agents see new notes appear live
-- **E2E Tests** — Playwright to automate the full flow end to end
-- **Email Notifications** — Ping the customer when their ticket status changes
-
----
-
-Built by me for the Datastraw AI + Tech Intern Assessment.
