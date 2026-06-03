@@ -1,0 +1,50 @@
+# ---------- OS / editor noise ----------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ---------- Python / backend ----------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---------- SQLite database (live data, not source) ----------
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+backend/support.db
+backend/_test/
+
+# ---------- Node / frontend ----------
+node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/_test/
+frontend/coverage/
+
+# ---------- Secrets / env ----------
+.env
+.env.local
+.env.*.local
+*.pem
+
+# ---------- Logs ----------
+*.log
+server.out.log
+server.err.log
+
+# ---------- Misc ----------
+.tmp/
+.cache/
