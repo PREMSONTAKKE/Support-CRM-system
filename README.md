@@ -32,14 +32,6 @@ I built this lightweight, full-stack ticket management system for the Datastraw 
 | 4 | **Filter by Status** | Click a tab: All / Open / In Progress / Closed — the list updates instantly |
 | 5 | **View & Update** | Click any ticket to see full details; change the status dropdown (auto-saves) or add a note |
 
-### 32 Extras I Added Beyond the Spec
-
-**Backend (13):** I validate status on PUT and on the list filter (rejects invalid values with 400), added Pydantic request validation (missing fields → 422 with field-level errors), built TKT-XXX collision retry for race conditions, added a `/health` endpoint for Render's uptime checks, configured CORS middleware, got auto Swagger UI at `/docs`, ordered results newest-first, short-circuited whitespace-only notes, made search case-insensitive with ILIKE, included subject in search, used `.env`-driven config, and set up cascade delete on the foreign key.
-
-**Frontend (13):** I added 300ms debounced search, client-side form validation with inline error messages, color-coded status badges (blue/amber/green), an "All" filter tab, toast notifications on actions, optimistic status update with rollback on failure, a sticky top nav bar, loading/empty/error state UIs, a "Back to tickets" link, a clear-search button (×), locale-formatted dates, a 404 page, and a card layout that kicks in below 720px.
-
-**Config/Project (6):** Dockerfile (python:3.11-slim), render.yaml Blueprint, vercel.json SPA rewrites, Procfile + runtime.txt as fallback, `.env.example` for both layers, and a `.gitignore`.
-
 ---
 
 ## Project Structure
