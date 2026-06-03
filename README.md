@@ -1,6 +1,6 @@
-# Support CRM — Datastraw AI + Tech Intern Assessment
+# Support CRM — My Datastraw AI + Tech Intern Assessment
 
-A lightweight, full-stack ticket management system built for the Datastraw assessment. 5 core features, 4 API endpoints, 2 database tables, and 32 extras — all running on live data with no mocks.
+I built this lightweight, full-stack ticket management system for the Datastraw assessment. It covers 5 core features across 4 API endpoints and 2 database tables, plus 32 extras — all running on live data with no mocks.
 
 - **Backend:** FastAPI + SQLAlchemy + SQLite
 - **Frontend:** React 18 + Vite + React Router v6
@@ -20,25 +20,25 @@ A lightweight, full-stack ticket management system built for the Datastraw asses
 
 ---
 
-## Features
+## What It Does
 
-### 5 Core Features (PDF Required)
+### The 5 Core Features (PDF Requirement)
 
-| # | Feature | Implementation |
+| # | Feature | How It Works |
 |---|---|---|
-| 1 | **Create Tickets** | POST /api/tickets — name, email, title, description; auto-generates TKT-XXX ID + timestamps |
-| 2 | **List All Tickets** | GET /api/tickets — ID, name, subject, status, date; newest first |
-| 3 | **Search** | As-you-type search (300ms debounce) across ticket_id, name, email, subject, description |
-| 4 | **Filter by Status** | Tab-based filter: All / Open / In Progress / Closed |
-| 5 | **View & Update** | Detail page with full info, auto-save status dropdown, add notes |
+| 1 | **Create Tickets** | POST /api/tickets — customer name, email, subject, description; auto-generates a TKT-XXX ID and timestamps |
+| 2 | **List All Tickets** | GET /api/tickets — returns ID, name, subject, status, created date; newest tickets first |
+| 3 | **Search** | Start typing in the search bar — it debounces 300ms then searches across ticket IDs, names, emails, subjects, and descriptions |
+| 4 | **Filter by Status** | Click a tab: All / Open / In Progress / Closed — the list updates instantly |
+| 5 | **View & Update** | Click any ticket to see full details; change the status dropdown (auto-saves) or add a note |
 
-### 32 Extras (Beyond PDF)
+### 32 Extras I Added Beyond the Spec
 
-**Backend (13):** status validation on PUT, status filter validation, Pydantic request validation (422 with field errors), TKT-XXX collision retry, `/health` endpoint, CORS middleware, auto Swagger UI at `/docs`, newest-first ordering, empty-notes short-circuit, case-insensitive ILIKE search, subject included in search, `.env`-driven config, cascade delete on FK.
+**Backend (13):** I validate status on PUT and on the list filter (rejects invalid values with 400), added Pydantic request validation (missing fields → 422 with field-level errors), built TKT-XXX collision retry for race conditions, added a `/health` endpoint for Render's uptime checks, configured CORS middleware, got auto Swagger UI at `/docs`, ordered results newest-first, short-circuited whitespace-only notes, made search case-insensitive with ILIKE, included subject in search, used `.env`-driven config, and set up cascade delete on the foreign key.
 
-**Frontend (13):** debounced search (300ms), client-side form validation with inline errors, color-coded status badges, "All" filter tab, toast notifications, optimistic status update with rollback, sticky top nav, loading/empty/error states, "Back to tickets" navigation, clear search button (×), locale date formatting, 404 page, card layout on mobile (<720px).
+**Frontend (13):** I added 300ms debounced search, client-side form validation with inline error messages, color-coded status badges (blue/amber/green), an "All" filter tab, toast notifications on actions, optimistic status update with rollback on failure, a sticky top nav bar, loading/empty/error state UIs, a "Back to tickets" link, a clear-search button (×), locale-formatted dates, a 404 page, and a card layout that kicks in below 720px.
 
-**Config/Project (6):** Dockerfile (python:3.11-slim), render.yaml Blueprint, vercel.json SPA rewrites, Procfile + runtime.txt fallback, `.env.example` for both layers, `.gitignore`.
+**Config/Project (6):** Dockerfile (python:3.11-slim), render.yaml Blueprint, vercel.json SPA rewrites, Procfile + runtime.txt as fallback, `.env.example` for both layers, and a `.gitignore`.
 
 ---
 
@@ -47,65 +47,65 @@ A lightweight, full-stack ticket management system built for the Datastraw asses
 ```
 Support CRM system/
 │
-├── backend/                      # FastAPI Python backend
-│   ├── main.py                   # App entrypoint — 4 endpoints + CORS + /health
-│   ├── database.py               # SQLite engine, SessionLocal, Base, get_db()
-│   ├── models.py                 # SQLAlchemy models: Ticket + Note (2 tables)
+├── backend/                      # My FastAPI Python backend
+│   ├── main.py                   # App entry — 4 endpoints + CORS + /health
+│   ├── database.py               # SQLite engine, session factory, Base, get_db()
+│   ├── models.py                 # SQLAlchemy models: Ticket + Note
 │   ├── schemas.py                # Pydantic request/response schemas
-│   ├── ticket_id_gen.py          # TKT-XXX unique ID generator with collision retry
-│   ├── seed.py                   # Demo data seeder (6 tickets with notes)
-│   ├── requirements.txt          # Python dependencies
-│   ├── runtime.txt               # Python version for Render (non-Docker fallback)
-│   ├── Procfile                  # Start command for Render (non-Docker fallback)
-│   ├── .env.example              # Backend env vars template
-│   └── .venv/                    # Local virtual environment (gitignored)
+│   ├── ticket_id_gen.py          # TKT-XXX generator with collision retry
+│   ├── seed.py                   # Seeds 6 demo tickets with notes
+│   ├── requirements.txt          # Python deps
+│   ├── runtime.txt               # Python version (non-Docker fallback)
+│   ├── Procfile                  # Start command (non-Docker fallback)
+│   ├── .env.example              # Env vars template
+│   └── .venv/                    # Virtual env (gitignored)
 │
-├── frontend/                     # React SPA (Vite)
+├── frontend/                     # My React SPA
 │   ├── src/
 │   │   ├── pages/
-│   │   │   ├── Dashboard.jsx     # / — ticket list + search + filter
-│   │   │   ├── CreateTicket.jsx  # /create — new ticket form
+│   │   │   ├── Dashboard.jsx     # / — search, filter, ticket list
+│   │   │   ├── CreateTicket.jsx  # /create — ticket form
 │   │   │   └── TicketDetail.jsx  # /tickets/:id — detail + status + notes
 │   │   ├── components/
 │   │   │   ├── SearchBar.jsx     # Debounced search input
-│   │   │   ├── StatusFilter.jsx  # Tab bar: All / Open / In Progress / Closed
-│   │   │   ├── StatusBadge.jsx   # Color-coded status pill
-│   │   │   ├── TicketList.jsx    # Table (desktop) / cards (mobile)
-│   │   │   └── Toast.jsx         # Bottom-right notification popup
+│   │   │   ├── StatusFilter.jsx  # All / Open / In Progress / Closed tabs
+│   │   │   ├── StatusBadge.jsx   # Colored status pill
+│   │   │   ├── TicketList.jsx    # Table on desktop, cards on mobile
+│   │   │   └── Toast.jsx         # Notification popup
 │   │   ├── api/
 │   │   │   └── tickets.js        # Fetch wrapper for all 4 endpoints
 │   │   ├── utils/
-│   │   │   └── format.js         # Date formatting helper
-│   │   ├── App.jsx               # Router + layout shell
-│   │   ├── App.css               # All styles (responsive, mobile-first)
-│   │   └── main.jsx              # React entrypoint
+│   │   │   └── format.js         # Date formatter
+│   │   ├── App.jsx               # Router + layout
+│   │   ├── App.css               # All styles (responsive)
+│   │   └── main.jsx              # React entry
 │   ├── index.html
-│   ├── vite.config.js            # Vite config (port 5173, 127.0.0.1)
+│   ├── vite.config.js            # Vite config (port 5173)
 │   ├── vercel.json               # SPA rewrites for Vercel
 │   ├── package.json
-│   └── .env.example              # Frontend env vars template
+│   └── .env.example
 │
-├── Dockerfile                    # Docker image (python:3.11-slim)
+├── Dockerfile                    # python:3.11-slim image
 ├── render.yaml                   # Render Blueprint (env: docker)
-├── .gitignore                    # 54 rules covering OS/Python/Node/secrets
-├── PROJECT_AUDIT.md              # Full compliance audit (local only, not in repo)
-├── DEMO_SCRIPT.md                # Demo video script (local only, not in repo)
-└── README.md                     # This file
+├── .gitignore                    # 54 rules
+├── PROJECT_AUDIT.md              # Compliance audit (local only)
+├── DEMO_SCRIPT.md                # Video script (local only)
+└── README.md                     # You're here
 ```
 
 ---
 
-## Tech Stack
+## Why I Chose What I Chose
 
-| Choice | Why |
+| Choice | My Reasoning |
 |---|---|
-| **FastAPI** | Auto Swagger UI, async-ready, Pydantic validation, minimal boilerplate |
-| **SQLite** | File-based, zero infrastructure, fits a 2-table schema — per spec's simplicity requirement |
-| **SQLAlchemy 2.x** | First-class FastAPI pairing; clean FK relationship between tickets and notes |
-| **React + Vite** | Fast devserver, 178KB production build (57KB gzipped), no heavy framework |
-| **Plain CSS** | Zero dependencies, easy to read, no framework lock-in |
-| **fetch (no axios)** | Built into the browser, one fewer dependency |
-| **Docker** | Avoids Python version incompatibilities on Render (builds on 3.11-slim) |
+| **FastAPI** | Gives me auto Swagger UI, Pydantic validation out of the box, and minimal boilerplate |
+| **SQLite** | Zero setup, file-based, perfect for a 2-table schema — the spec says "keep it simple" |
+| **SQLAlchemy 2.x** | Pairs cleanly with FastAPI and handles the FK between tickets and notes nicely |
+| **React + Vite** | Fast dev server, 178KB production build (57KB gzipped), no heavy framework overhead |
+| **Plain CSS** | No dependencies to manage, easy to read, and the UI is small enough |
+| **fetch (no axios)** | It's built into every browser — one less dependency to audit |
+| **Docker** | Avoids the Python 3.14 / pydantic-core build failure I hit on Render's default builder |
 
 ---
 
@@ -116,7 +116,7 @@ Support CRM system/
 | Column | Type | Notes |
 |---|---|---|
 | `id` | INTEGER | Primary key, auto-increment |
-| `ticket_id` | TEXT | Unique, format `TKT-XXX` (3-digit zero-padded) |
+| `ticket_id` | TEXT | Unique, format `TKT-XXX` |
 | `customer_name` | TEXT | Required |
 | `customer_email` | TEXT | Required |
 | `subject` | TEXT | Required |
@@ -163,12 +163,12 @@ Content-Type: application/json
 GET /api/tickets?status=Open&search=alice
 ```
 
-| Query Param | Type | Description |
+| Param | Type | Description |
 |---|---|---|
 | `status` | string (optional) | `Open` / `In Progress` / `Closed` |
 | `search` | string (optional) | Case-insensitive match across ticket_id, name, email, subject, description |
 
-Results ordered by `created_at` descending.
+Results are ordered by `created_at` descending (newest first).
 
 **Response 200**
 ```json
@@ -216,7 +216,7 @@ Content-Type: application/json
 }
 ```
 
-Both `status` and `notes` are optional. If `notes` is non-empty, a new Note row is inserted. `updated_at` is bumped whenever anything changes.
+Both `status` and `notes` are optional. If `notes` is non-empty, I insert a new row in the `notes` table. `updated_at` gets bumped whenever anything changes.
 
 **Response 200**
 ```json
@@ -225,33 +225,33 @@ Both `status` and `notes` are optional. If `notes` is non-empty, a new Note row 
 
 ### Error Responses
 
-| Status | Scenario |
+| Status | When You'll See It |
 |---|---|
-| 400 | Invalid status value (not Open/In Progress/Closed) |
-| 404 | Ticket ID not found |
-| 422 | Missing required field or validation failure |
+| 400 | Invalid status (not Open/In Progress/Closed) |
+| 404 | Ticket ID doesn't exist |
+| 422 | Missing or invalid request fields |
 
 ---
 
 ## Frontend Views
 
-| Route | Page | Features |
+| Route | What You See | What You Can Do |
 |---|---|---|
-| `/` | Dashboard | Search bar (300ms debounce), status filter tabs (All/Open/In Progress/Closed), ticket list with table (desktop) → cards (mobile <720px) |
-| `/create` | Create Ticket | 4-field form, inline validation errors, server error display, redirects to detail on success |
-| `/tickets/:id` | Ticket Detail | Full ticket info, auto-save status dropdown, notes timeline, add-note form, toast on change |
-| `*` | 404 | Graceful unknown-route page |
+| `/` | Dashboard | Search (debounced 300ms), filter tabs (All/Open/In Progress/Closed), ticket list — table on desktop, cards below 720px |
+| `/create` | Create Ticket | Fill in 4 fields; I validate client-side and show server errors; redirects to the new ticket on success |
+| `/tickets/:id` | Ticket Detail | See everything about a ticket; change status (auto-saves immediately); read and add notes; toast pops up on changes |
+| `*` | 404 page | You hit a route that doesn't exist |
 
 ---
 
-## Local Development
+## Running It Locally
 
-### Prerequisites
+### What You'll Need
 
 - Python 3.10+
 - Node.js 18+
 
-### 1. Backend Setup
+### 1. Backend
 
 ```bash
 cd backend
@@ -264,27 +264,26 @@ python -m venv .venv
 
 pip install -r requirements.txt
 
-# Copy environment file:
 copy .env.example .env        # Windows
 # cp .env.example .env        # macOS / Linux
 
 uvicorn main:app --reload --port 8000
 ```
 
-Swagger UI → http://127.0.0.1:8000/docs
+Open Swagger UI → http://127.0.0.1:8000/docs
 
-### 2. Seed Demo Data (Optional)
+### 2. Seed Some Demo Data (Optional)
 
-With the backend venv active and the server **not** running:
+With the venv active and the server **stopped**:
 
 ```bash
 cd backend
 python seed.py
 ```
 
-This creates 6 realistic tickets (Emily Chen, Marcus Rivera, Priya Sharma, etc.) with varied statuses and notes spread across the last 3 days.
+This creates 6 realistic tickets (Emily Chen, Marcus Rivera, Priya Sharma, and three more) with notes and varying statuses spread across the last 3 days.
 
-### 3. Frontend Setup
+### 3. Frontend
 
 ```bash
 cd frontend
@@ -296,12 +295,11 @@ copy .env.example .env        # Windows
 npm run dev
 ```
 
-App → http://127.0.0.1:5173
+Open the app → http://127.0.0.1:5173
 
-### 4. (Optional) Docker
+### 4. Or Run the Backend in Docker
 
 ```bash
-# Build and run the backend in a container:
 docker build -t support-crm-api .
 docker run -p 8000:8000 support-crm-api
 ```
@@ -312,18 +310,18 @@ docker run -p 8000:8000 support-crm-api
 
 ### Backend (`backend/.env`)
 
-| Variable | Default | Purpose |
+| Variable | Default | What It Does |
 |---|---|---|
 | `DATABASE_URL` | `sqlite:///./support.db` | SQLAlchemy connection string |
 | `FRONTEND_ORIGIN` | `http://localhost:5173,http://127.0.0.1:5173` | Comma-separated CORS allow-list |
 
 ### Frontend (`frontend/.env`)
 
-| Variable | Default | Purpose |
+| Variable | Default | What It Does |
 |---|---|---|
 | `VITE_API_URL` | `http://127.0.0.1:8000` | Base URL for the FastAPI backend |
 
-> **Important:** `VITE_API_URL` is baked into the frontend at **build time** (Vite behavior). If you change the backend URL after building, you must rebuild and redeploy the frontend.
+> **Note:** Vite bakes `VITE_API_URL` into the frontend **at build time**, not at runtime. If you change the backend URL after building, you need to rebuild and redeploy the frontend.
 
 ---
 
@@ -333,36 +331,33 @@ docker run -p 8000:8000 support-crm-api
 
 1. Push the repo to GitHub.
 2. In Render Dashboard → **New Blueprint** → Connect your repo.
-3. Render automatically reads `render.yaml` and deploys using the `Dockerfile`.
-4. Set env vars in the Render dashboard if needed:
-   - `FRONTEND_ORIGIN` → your deployed Vercel URL
+3. Render reads `render.yaml` and deploys using the `Dockerfile`.
+4. Set `FRONTEND_ORIGIN` in Render's env vars to your deployed Vercel URL.
 
-Alternatively, create a **Web Service** manually:
+Or create a **Web Service** manually:
 - **Runtime:** Docker
 - **Dockerfile Path:** `./Dockerfile`
 - **Health Check Path:** `/health`
 
-> The Dockerfile uses `python:3.11-slim` to avoid the Python 3.14 / pydantic-core incompatibility that affects Render's default Python builder.
+> I used Docker because Render's default Python builder kept failing on Python 3.14 / pydantic-core incompatibility. The `python:3.11-slim` image resolves that.
 
 ### Frontend → Vercel
 
-1. In Vercel Dashboard → **Add New Project** → Import your GitHub repo.
+1. Vercel Dashboard → **Add New Project** → Import your GitHub repo.
 2. **Root Directory:** `frontend/`
 3. **Framework Preset:** Vite
-4. **Environment Variables:** Add `VITE_API_URL` = your deployed Render backend URL.
-5. Deploy. The `vercel.json` file handles SPA rewrites so all routes work on refresh.
+4. **Environment Variables:** `VITE_API_URL` = your deployed Render backend URL.
+5. Deploy. My `vercel.json` handles SPA rewrites so all routes work on refresh.
 
-### Updating CORS for Production
+### Don't Forget CORS
 
-After deploying the frontend, set the backend's `FRONTEND_ORIGIN` env var to the deployed Vercel URL in Render's dashboard, then trigger a manual deploy.
+After deploying the frontend, update the backend's `FRONTEND_ORIGIN` env var in Render to your Vercel URL, then trigger a manual deploy.
 
 ---
 
 ## Testing
 
-### Backend
-
-The backend was tested with pytest (41 tests covering all endpoints, edge cases, and validation). Run them from the `backend/` directory:
+### Backend (pytest — 41 tests)
 
 ```bash
 cd backend
@@ -370,9 +365,9 @@ cd backend
 pytest
 ```
 
-### Frontend
+I wrote 41 tests covering all endpoints, edge cases (invalid status, missing fields, 404s), and validation.
 
-The production build was verified:
+### Frontend (build check)
 
 ```bash
 cd frontend
@@ -380,32 +375,26 @@ npm run build
 npx vite preview
 ```
 
-Build output: 178KB JS (57KB gzipped), zero warnings.
+Production build: 178KB JS (57KB gzipped), zero warnings.
 
 ---
 
 ## Project Audit
 
-A full compliance audit (`PROJECT_AUDIT.md`) exists locally in the project root. It documents:
-- Every PDF requirement vs. implementation status
-- All 32 extras beyond the spec
-- The 5 core features and their implementation
-- What was intentionally deferred
-
-This file is kept local (gitignored) — share it if the evaluator requests detailed tracking.
+I've kept a full compliance audit (`PROJECT_AUDIT.md`) locally in the project root. It maps every PDF requirement to its implementation status, lists all 32 extras I added, and documents what I intentionally deferred. It's gitignored — share it if the evaluator wants the detailed breakdown.
 
 ---
 
-## What I'd Add With More Time
+## What I'd Do Next If I Had More Time
 
-- **Authentication** — Basic login or JWT so agents can own and be assigned tickets
-- **PostgreSQL** — Production durability (SQLite resets on Render free-tier deploys)
-- **Pagination** — Current list endpoint is unbounded; at scale this needs page numbers
-- **File Attachments** — Upload screenshots or documents with tickets
-- **Real-time Updates** — WebSockets so multiple agents see new notes live
-- **E2E Tests** — Playwright to automate the full user flow
-- **Email Notifications** — Send email when a ticket is created or updated
+- **Authentication** — Add login so agents can own and be assigned tickets
+- **PostgreSQL** — Swap out SQLite for durability (it resets on Render free-tier deploys)
+- **Pagination** — The list endpoint is unbounded; at scale it'd need page numbers
+- **File Attachments** — Let customers upload screenshots with their tickets
+- **Real-time Updates** — WebSockets so multiple agents see new notes appear live
+- **E2E Tests** — Playwright to automate the full flow end to end
+- **Email Notifications** — Ping the customer when their ticket status changes
 
 ---
 
-Built for the Datastraw AI + Tech Intern Assessment.
+Built by me for the Datastraw AI + Tech Intern Assessment.
