@@ -32,7 +32,7 @@ export default function App() {
       </main>
 
       <footer className="app__footer">
-        <span>Support CRM · Built for the Datastraw assessment</span>
+        <span>Support CRM</span>
       </footer>
     </div>
   )

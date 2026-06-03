@@ -1,11 +1,11 @@
-# Support CRM — My Datastraw AI + Tech Intern Assessment
+# Support CRM
 
-I built this lightweight, full-stack ticket management system for the Datastraw assessment. It covers 5 core features across 4 API endpoints and 2 database tables, plus 32 extras — all running on live data with no mocks.
+A lightweight, full-stack ticket management system. 5 core features, 4 API endpoints, 2 database tables — all running on live data with no mocks.
 
 - **Backend:** FastAPI + SQLAlchemy + SQLite
 - **Frontend:** React 18 + Vite + React Router v6
 - **Database:** 2 tables (`tickets`, `notes`)
-- **API:** Exactly 4 endpoints
+- **API:** 4 endpoints
 - **Deployment:** Docker → Render (backend), Vercel (frontend)
 
 ---
@@ -22,7 +22,7 @@ I built this lightweight, full-stack ticket management system for the Datastraw 
 
 ## What It Does
 
-### The 5 Core Features (PDF Requirement)
+### The 5 Core Features
 
 | # | Feature | How It Works |
 |---|---|---|
@@ -90,7 +90,7 @@ Support CRM system/
 | Choice | My Reasoning |
 |---|---|
 | **FastAPI** | Gives me auto Swagger UI, Pydantic validation out of the box, and minimal boilerplate |
-| **SQLite** | Zero setup, file-based, perfect for a 2-table schema — the spec says "keep it simple" |
+| **SQLite** | Zero setup, file-based, perfect for a 2-table schema |
 | **SQLAlchemy 2.x** | Pairs cleanly with FastAPI and handles the FK between tickets and notes nicely |
 | **React + Vite** | Fast dev server, 178KB production build (57KB gzipped), no heavy framework overhead |
 | **Plain CSS** | No dependencies to manage, easy to read, and the UI is small enough |
@@ -329,7 +329,7 @@ Or create a **Web Service** manually:
 - **Dockerfile Path:** `./Dockerfile`
 - **Health Check Path:** `/health`
 
-> I used Docker because Render's default Python builder kept failing on Python 3.14 / pydantic-core incompatibility. The `python:3.11-slim` image resolves that.
+> The Dockerfile uses `python:3.11-slim` for a consistent runtime environment.
 
 ### Frontend → Vercel
 

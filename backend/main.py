@@ -43,7 +43,7 @@ def _cors_origins() -> List[str]:
 app = FastAPI(
     title="Support CRM API",
     version="1.0.0",
-    description="Datastraw AI + Tech Intern Assessment — Ticket management API",
+    description="Support CRM — Ticket management API",
 )
 
 app.add_middleware(
