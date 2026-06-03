@@ -14,9 +14,9 @@ I built this lightweight, full-stack ticket management system for the Datastraw 
 
 | Layer | URL |
 |---|---|
-| Frontend | `https://your-app.vercel.app` |
-| Backend  | `https://your-api.onrender.com` |
-| API Docs | `https://your-api.onrender.com/docs` (Swagger UI) |
+| Frontend | `https://support-crm-system-seven.vercel.app` |
+| Backend  | `https://support-crm-system-lfsg.onrender.com` |
+| API Docs | `https://support-crm-system-lfsg.onrender.com/docs` (Swagger UI) |
 
 ---
 
@@ -88,8 +88,6 @@ Support CRM system/
 ├── Dockerfile                    # python:3.11-slim image
 ├── render.yaml                   # Render Blueprint (env: docker)
 ├── .gitignore                    # 54 rules
-├── PROJECT_AUDIT.md              # Compliance audit (local only)
-├── DEMO_SCRIPT.md                # Video script (local only)
 └── README.md                     # You're here
 ```
 
@@ -378,10 +376,6 @@ npx vite preview
 Production build: 178KB JS (57KB gzipped), zero warnings.
 
 ---
-
-## Project Audit
-
-I've kept a full compliance audit (`PROJECT_AUDIT.md`) locally in the project root. It maps every PDF requirement to its implementation status, lists all 32 extras I added, and documents what I intentionally deferred. It's gitignored — share it if the evaluator wants the detailed breakdown.
 
 ---
 
